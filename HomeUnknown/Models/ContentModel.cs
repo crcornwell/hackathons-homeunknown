@@ -13,5 +13,7 @@ namespace HomeUnknown.Models
 
         Guid EventId { get; set; }
 
+        ContentType ContentType { get; set; }
+
     }
 }
