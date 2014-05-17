@@ -39,6 +39,24 @@ namespace HomeUnknown
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/arbor").Include(
+                "~/Scripts/arbor.js"
+                , "~/Scripts/arbor-tween.js"
+                , "~/Scripts/arborsrc/dev.js"
+                , "~/Scripts/arborsrc/etc.js"
+                , "~/Scripts/arborsrc/hermetic.js"
+                , "~/Scripts/arborsrc/kernel.js"
+                , "~/Scripts/arborsrc/graphics/colors.js"
+                , "~/Scripts/arborsrc/graphics/graphics.js"
+                , "~/Scripts/arborsrc/graphics/primitives.js"
+                , "~/Scripts/arborsrc/physics/atoms.js"
+                , "~/Scripts/arborsrc/physics/barnes-hut.js"
+                , "~/Scripts/arborsrc/physics/physics.js"
+                , "~/Scripts/arborsrc/physics/system.js"
+                , "~/Scripts/arborsrc/physics/worker.js"
+                , "~/Scripts/arborsrc/tween/easing.js"
+                , "~/Scripts/arborsrc/tween/tween.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                  "~/Content/bootstrap.css",
                  "~/Content/Site.css"));

@@ -11,5 +11,10 @@ namespace HomeUnknown.Controllers
         {
             return View();
         }
+
+        public ActionResult View1()
+        {
+            return View();
+        }
     }
 }

@@ -224,7 +224,22 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\arbor-tween.js" />
     <Content Include="Scripts\arbor.js" />
+    <Content Include="Scripts\arborsrc\dev.js" />
+    <Content Include="Scripts\arborsrc\etc.js" />
+    <Content Include="Scripts\arborsrc\graphics\colors.js" />
+    <Content Include="Scripts\arborsrc\graphics\graphics.js" />
+    <Content Include="Scripts\arborsrc\graphics\primitives.js" />
+    <Content Include="Scripts\arborsrc\hermetic.js" />
+    <Content Include="Scripts\arborsrc\kernel.js" />
+    <Content Include="Scripts\arborsrc\physics\atoms.js" />
+    <Content Include="Scripts\arborsrc\physics\barnes-hut.js" />
+    <Content Include="Scripts\arborsrc\physics\physics.js" />
+    <Content Include="Scripts\arborsrc\physics\system.js" />
+    <Content Include="Scripts\arborsrc\physics\worker.js" />
+    <Content Include="Scripts\arborsrc\tween\easing.js" />
+    <Content Include="Scripts\arborsrc\tween\tween.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -281,6 +296,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\View1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
