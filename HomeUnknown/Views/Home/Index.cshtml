@@ -14,11 +14,20 @@
 </head>
 <body>
     <div ng-controller="timelineController">
-        <ul>
-            <li ng-repeat="timeline in timelines">
-                <p>{{timeline.name}}</p>
-            </li>
-        </ul>
+        <div ng-repeat="timeline in timelines">
+            <ul>
+                <li>
+                    <p>{{timeline.name}}</p>
+                </li>
+                <li>
+                    <p>{{timeline._BeginningYear}}</p>
+                </li>
+                <li>
+                    <img src="{{timeline.pictureurl}}"/>
+                </li>
+            </ul>
+        </div>
+
     </div>
 
     @Scripts.Render("~/bundles/jquery")

@@ -14,15 +14,15 @@ namespace HomeUnknown.Controllers
     {
         [HttpGet]
         [Route("timelines/{familyId}")]
-        public string GetTimelines()
+        public List<TimelineModel> GetTimelines()
         {
             //List<TimelineModel> timelines = GetFromSQL(familyID);
 
             List<TimelineModel> timelines = new List<TimelineModel>();
-            timelines.Add(new TimelineModel(DateTime.Now, new Uri("http://www.test.com/test"), new Guid(), "Test"));
-            timelines.Add(new TimelineModel(DateTime.Now, new Uri("http://www.test.com/test"), new Guid(), "Name"));
+            timelines.Add(new TimelineModel(DateTime.Now, new Uri("http://www.test.com/test"), Guid.NewGuid(), "Test"));
+            timelines.Add(new TimelineModel(DateTime.Now.AddYears(1), new Uri("http://www.comp.com/test"), Guid.NewGuid(), "Name"));
 
-            return JsonConvert.SerializeObject(timelines);
+            return timelines;
         }
 
         [HttpGet]

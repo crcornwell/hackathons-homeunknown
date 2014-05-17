@@ -16,7 +16,13 @@ namespace HomeUnknown.Models
         }
 
         public DateTime BeginningYear { get; set; }
-
+        public int _BeginningYear
+        {
+            get
+            {
+                return this.BeginningYear.Year;
+            }
+        }
         public Uri PictureURL { get; set; }
     }
 }
