@@ -5,10 +5,10 @@ using System.Web;
 
 namespace HomeUnknown.Models
 {
-    public class RecordModel
+    public abstract class RecordModel
     {
-        string Name { get; set; }
+        public string Name { get; set; }
 
-        Guid Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

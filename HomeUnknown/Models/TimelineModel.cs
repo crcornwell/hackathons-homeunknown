@@ -7,8 +7,16 @@ namespace HomeUnknown.Models
 {
     public class TimelineModel : RecordModel
     {
-        DateTime BeginningYear { get; set; }
+        public TimelineModel(DateTime date, Uri url, Guid id, string name)
+        {
+            this.BeginningYear = date;
+            this.Id = id;
+            this.Name = name;
+            this.PictureURL = url;
+        }
 
-        Uri PictureURL { get; set; }
+        public DateTime BeginningYear { get; set; }
+
+        public Uri PictureURL { get; set; }
     }
 }

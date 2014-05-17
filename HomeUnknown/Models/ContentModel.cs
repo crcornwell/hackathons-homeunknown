@@ -7,7 +7,7 @@ namespace HomeUnknown.Models
 {
     public class ContentModel : RecordModel
     {
-        Uri? ContentURL { get; set; }
+        Uri ContentURL { get; set; }
 
         string NoteText { get; set; }
 
