@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
+using HomeUnknown.Models;
 
 namespace HomeUnknown.Controllers
 {
@@ -15,7 +16,7 @@ namespace HomeUnknown.Controllers
         [Route("timelines/{familyId}")]
         public string Get(Guid familyID)
         {
-            List<Timeline> timelines = GetFromSQL(familyID);
+            List<TimelineModel> timelines = GetFromSQL(familyID);
             return JsonConvert.SerializeObject(timelines);
         }
 
@@ -23,7 +24,7 @@ namespace HomeUnknown.Controllers
         [Route("events/{timelineId")]
         public string Get(Guid timelineId)
         {
-            List<Event> events = GetFromSQL(timelineId);
+            List<EventModel> events = GetFromSQL(timelineId);
             return JsonConvert.SerializeObject(events);
         }
 
@@ -31,7 +32,7 @@ namespace HomeUnknown.Controllers
         [Route("contents/{eventId")]
         public string Get(Guid eventId)
         {
-            List<Content> contents = GetFromSQL(eventId);
+            List<ContentModel> contents = GetFromSQL(eventId);
             return JsonConvert.SerializeObject(contents);
         }
 
