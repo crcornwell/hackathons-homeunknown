@@ -21,7 +21,7 @@ namespace HomeUnknown.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
-    public class AccountController : ApiController
+    public class AccountController : HomeUnknownApiController
     {
         private const string LocalLoginProvider = "Local";
 
