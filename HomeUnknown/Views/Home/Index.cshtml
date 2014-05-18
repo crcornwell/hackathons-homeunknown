@@ -57,7 +57,7 @@
         <div class="container">
             <div class="row" id="content-panel">
                 <ul class="contents-list list-inline grid effect-2" id="grid">
-                    <li ng-repeat="content in contents" class="animate ng-scope">
+                    <li ng-repeat="content in contents" class="animate">
                         <a ui-sref="events.contents.detail({ contentId: content.id })">
                             <pre style="text-align: left; font-size: .75em">{{content | json}}</pre>
                         </a>
