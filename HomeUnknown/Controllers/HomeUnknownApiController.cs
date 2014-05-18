@@ -133,7 +133,7 @@ namespace HomeUnknown.Controllers
                     HomeUnknownEntities entityHelper = new HomeUnknownEntities();
                     entityHelper.sp_ins_TimelineEvent(model.TimelineId, model.Name, model.Location, model.Year);
 
-                    resp = Request.CreateResponse(HttpStatusCode.OK);
+                    resp = Request.CreateResponse(HttpStatusCode.OK, "Success!");
                 }
                 catch (Exception ex)
                 {
