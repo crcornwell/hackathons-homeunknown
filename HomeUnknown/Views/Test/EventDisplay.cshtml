@@ -1,0 +1,39 @@
+﻿@model IList<HomeUnknown.Models.EventModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<title>EventDisplay</title>
+
+@foreach (var item in Model)
+{
+    @item.Name <button type="button" value="@item.Id" class="eventButton">Enter Content</button>
+    <br />
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            NavigateToEnterContent();
+
+        });
+
+        function NavigateToEnterContent() {
+
+            $(".eventButton").bind("click", function (e) {
+
+                e.preventDefault();
+
+                var id = $(this).val();
+
+                window.location = "/test/InputContent/" + id;
+
+            });
+        }
+
+    </script>
+
+}
