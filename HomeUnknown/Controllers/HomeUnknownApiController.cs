@@ -20,7 +20,7 @@ namespace HomeUnknown.Controllers
             //List<TimelineModel> timelines = GetFromSQL(familyID);
 
             List<TimelineModel> timelines = new List<TimelineModel>();
-            timelines.Add(new TimelineModel(DateTime.Now, new Uri("http://homeunknown.collabaxis.com/profilepics/lucilaprofile.jpg"), Guid.NewGuid(), "Lucila"));
+            timelines.Add(new TimelineModel(DateTime.Now, new Uri("http://homeunknown.collabaxis.com/profilepics/lucilaprofile.jpg"), Guid.Parse("06ae6abb-0296-4f10-b6af-3b13fe9b4fcf"), "Lucila"));
             timelines.Add(new TimelineModel(DateTime.Now.AddYears(1), new Uri("http://homeunknown.collabaxis.com/profilepics/oscarprofile.jpg"), Guid.NewGuid(), "Oscar"));
 
             return timelines;
@@ -28,7 +28,7 @@ namespace HomeUnknown.Controllers
 
         [HttpGet]
         [Route("events/{timelineId}")]
-        public string GetEvents(Guid timelineId)
+        public List<EventModel> GetEvents(Guid timelineId)
         {
             List<EventModel> events = null;
 
@@ -55,7 +55,7 @@ namespace HomeUnknown.Controllers
                     events.Add(model);
                 }
             }
-            return JsonConvert.SerializeObject(events);
+            return events;
         }
 
         [HttpGet]

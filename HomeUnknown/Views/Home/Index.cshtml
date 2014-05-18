@@ -29,15 +29,15 @@
     </script>
 
     <script type="text/ng-template" id="events.html">
-        <div>
-            <ul class="list-inline timeline-list">
-                <li class="list-inline" ng-repeat="event in events">
-                    <a href="#/events/{{event.id}}"><img src="{{event.pictureURL}}" /></a>
-                    <p>{{event.name}}</p>
-                </li>
-            </ul>
-        </div>
+                <ul class="events-list list-inline">
+                    <li ng-repeat="event in events"><a href="#/contents/{{event.id}}"><div></div></a></li>
+                </ul>
     </script>
+
+    <script type="text/ng-template" id="contents.html">
+        <p ng-repeat="content in contents">{{content.name}}</p>
+    </script>
+
 </head>
 <body>
     <div class="navbar navbar-default">
@@ -50,7 +50,6 @@
                     <li><a href="http://builtwithbootstrap.com/" target="_blank">Welcome Steven</a></li>
                     <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank"><i class="glyphicon glyphicon-inbox"></i></a></li>
                 </ul>
-
             </div>
         </div>
     </div>

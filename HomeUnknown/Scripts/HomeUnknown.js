@@ -6,12 +6,13 @@
         controller: 'TimelineCtrl',
         templateUrl: 'timelines.html'
     })
-    .when('/#/events/:timelineId', {
+    .when('/contents/:eventId', {
+        controller: 'ContentsCtrl',
+        templateUrl: 'contents.html'
+    })
+    .when('/events/:timelineId', {
         controller: 'EventsCtrl',
-        template: 'events.html'
-    //})
-    //.otherwise({
-    //    redirectTo: '/'
+        templateUrl: 'events.html'
     });
 })
 
@@ -22,9 +23,17 @@
     })
 })
 
+.controller('ContentsCtrl', function ($scope, $http, $routeParams) {
+    $http({ method: 'GET', url: 'api/contents/' + $routeParams.eventId }).
+    success(function (data) {
+        $scope.contents = data;
+    })
+})
+
 .controller('EventsCtrl', function ($scope, $http, $routeParams) {
     $http({ method: 'GET', url: '/api/events/' + $routeParams.timelineId }).
     success(function (data) {
         $scope.events = data;
-    })
+
+    });
 });
