@@ -7,6 +7,11 @@
     margin: 50px;
 }
 
+.timeline-list > li > p {
+    font-weight: bold;
+    font-size: large;
+}
+
 .timeline-list > li > a > img {
     border-radius: 200px;
     width: 200px;
@@ -20,4 +25,19 @@
     cursor: pointer;
     width: 210px;
     height: 210px;
+}
+
+.events-list {
+    text-align:center;
+}
+
+.events-list > li {
+    margin: 10px;
+}
+
+.events-list > li > a > div {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50px;
 }
