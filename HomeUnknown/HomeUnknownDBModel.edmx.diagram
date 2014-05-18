@@ -9,6 +9,8 @@
         <EntityTypeShape EntityType="HomeUnknownModel.tbl_Events" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="HomeUnknownModel.tbl_Timelines" Width="1.5" PointX="2.75" PointY="3.75" />
         <AssociationConnector Association="HomeUnknownModel.FK_tbl_Events_tbl_Events" />
+        <EntityTypeShape EntityType="HomeUnknownModel.tbl_relUserContent" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HomeUnknownModel.tbl_Users" Width="1.5" PointX="5.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HomeUnknownModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HomeUnknownModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_Contents">
           <Key>
             <PropertyRef Name="Content_PK" />
@@ -26,6 +26,13 @@
           <Property Name="EventLocation" Type="nvarchar" MaxLength="200" />
           <Property Name="EventYear" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbl_relUserContent">
+          <Key>
+            <PropertyRef Name="Content_PK" />
+          </Key>
+          <Property Name="Content_PK" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="User_PK" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_Timelines">
           <Key>
             <PropertyRef Name="Timeline_PK" />
@@ -34,6 +41,14 @@
           <Property Name="BeginningYear" Type="datetime" Nullable="false" />
           <Property Name="PictureURL" Type="nvarchar(max)" Nullable="false" />
           <Property Name="TimelineName" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="User_PK" />
+          </Key>
+          <Property Name="User_PK" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="UserPicURL" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <Association Name="FK_tbl_Events_tbl_Events">
           <End Role="tbl_Events" Type="Self.tbl_Events" Multiplicity="1" />
@@ -72,10 +87,15 @@
         <Function Name="sp_sel_TimelineHome_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FamilyID" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="sp_sel_UserPicture" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ContentId" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <EntityContainer Name="HomeUnknownModelStoreContainer">
           <EntitySet Name="tbl_Contents" EntityType="Self.tbl_Contents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Events" EntityType="Self.tbl_Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_relUserContent" EntityType="Self.tbl_relUserContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Timelines" EntityType="Self.tbl_Timelines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tbl_Events_tbl_Events" Association="Self.FK_tbl_Events_tbl_Events">
             <End Role="tbl_Events" EntitySet="tbl_Events" />
             <End Role="tbl_Events1" EntitySet="tbl_Events" />
@@ -116,6 +136,11 @@
             <Parameter Name="EventYear" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_sel_SingleMedia" ReturnType="Collection(HomeUnknownModel.sp_sel_SingleMedia_Result)">
+          <Parameter Name="ContentId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <EntitySet Name="tbl_relUserContent" EntityType="HomeUnknownModel.tbl_relUserContent" />
+          <EntitySet Name="tbl_Users" EntityType="HomeUnknownModel.tbl_Users" />
+          <FunctionImport Name="sp_sel_UserPicture" ReturnType="Collection(String)">
             <Parameter Name="ContentId" Mode="In" Type="Guid" />
           </FunctionImport>
         </EntityContainer>
@@ -188,6 +213,21 @@
           <Property Type="Int32" Name="ContentType" Nullable="false" />
           <Property Type="String" Name="ContentURL" Nullable="true" />
         </ComplexType>
+        <EntityType Name="tbl_relUserContent">
+          <Key>
+            <PropertyRef Name="Content_PK" />
+          </Key>
+          <Property Name="Content_PK" Type="Guid" Nullable="false" />
+          <Property Name="User_PK" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="User_PK" />
+          </Key>
+          <Property Name="User_PK" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UserPicURL" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -270,6 +310,24 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tbl_relUserContent">
+            <EntityTypeMapping TypeName="HomeUnknownModel.tbl_relUserContent">
+              <MappingFragment StoreEntitySet="tbl_relUserContent">
+                <ScalarProperty Name="User_PK" ColumnName="User_PK" />
+                <ScalarProperty Name="Content_PK" ColumnName="Content_PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Users">
+            <EntityTypeMapping TypeName="HomeUnknownModel.tbl_Users">
+              <MappingFragment StoreEntitySet="tbl_Users">
+                <ScalarProperty Name="UserPicURL" ColumnName="UserPicURL" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="User_PK" ColumnName="User_PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_sel_UserPicture" FunctionName="HomeUnknownModel.Store.sp_sel_UserPicture" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

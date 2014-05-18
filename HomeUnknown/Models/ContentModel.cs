@@ -15,5 +15,7 @@ namespace HomeUnknown.Models
 
         public ContentType ContentType { get; set; }
 
+        public Uri UserURL { get; set; }
+
     }
 }
