@@ -15,7 +15,7 @@ namespace HomeUnknown.Models
         {
             get
             {
-                return this.Year.Year.ToString();
+                return this.Year.ToShortDateString();
             }
         }
 
