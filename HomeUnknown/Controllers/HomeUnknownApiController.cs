@@ -60,7 +60,7 @@ namespace HomeUnknown.Controllers
 
         [HttpGet]
         [Route("contents/{eventId}")]
-        public string GetContents(Guid eventId)
+        public List<ContentModel> GetContents(Guid eventId)
         {
             List<ContentModel> contents = null; // GetFromSQL(eventId);
 
@@ -89,12 +89,12 @@ namespace HomeUnknown.Controllers
                     contents.Add(model);
                 }
             }
-            return JsonConvert.SerializeObject(contents);
+            return contents;
         }
 
         [HttpGet]
         [Route("content/{contentId}")]
-        public string GetMedia(Guid contentId)
+        public ContentModel GetMedia(Guid contentId)
         {
             ContentModel model = null;
 
@@ -113,7 +113,7 @@ namespace HomeUnknown.Controllers
                 model.NoteText = singleMedia.First().ContentText;
                 model.ContentType = (ContentType)singleMedia.First().ContentType;
             }
-            return JsonConvert.SerializeObject(model);
+            return model;
         }
 
         [HttpPost]

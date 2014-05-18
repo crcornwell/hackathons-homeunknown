@@ -1,4 +1,4 @@
-﻿angular.module('homeUnknown', ['ngRoute'])
+﻿angular.module('homeUnknown', ['ngRoute', 'ui.router'])
 
 .config(function ($routeProvider) {
     $routeProvider
@@ -6,7 +6,7 @@
         controller: 'TimelineCtrl',
         templateUrl: 'timelines.html'
     })
-    .when('/contents/:eventId', {
+    .when('/contents/:eventId/:timelineId', {
         controller: 'ContentsCtrl',
         templateUrl: 'contents.html'
     })
@@ -14,6 +14,14 @@
         controller: 'EventsCtrl',
         templateUrl: 'events.html'
     });
+})
+
+.config(function ($stateProvider) {
+    $stateProvider
+    .state('contents', {
+        templateUrl: 'contents.html',
+        controller: 'ContentsCtrl'
+    })
 })
 
 .controller('TimelineCtrl', function ($scope, $http) {
@@ -27,7 +35,15 @@
     $http({ method: 'GET', url: 'api/contents/' + $routeParams.eventId }).
     success(function (data) {
         $scope.contents = data;
-    })
+        $scope.eventID = $routeParams.eventId;
+    });
+    $http({ method: 'GET', url: 'api/events/' + $routeParams.timelineId }).
+    success(function (data) {
+        $scope.events = data;
+    });
+    $scope.addContent = function(eventId) {
+
+    }
 })
 
 .controller('EventsCtrl', function ($scope, $http, $routeParams) {

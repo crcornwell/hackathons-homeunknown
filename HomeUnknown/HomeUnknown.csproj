@@ -270,6 +270,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-ui-router.min.js" />
     <Content Include="Scripts\arbor-tween.js" />
     <Content Include="Scripts\arbor.js" />
     <Content Include="Scripts\arborsrc\dev.js" />
