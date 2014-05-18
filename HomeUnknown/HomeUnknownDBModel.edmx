@@ -63,6 +63,9 @@
         <Function Name="sp_sel_EventContent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventId" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="sp_sel_SingleMedia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ContentId" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="sp_sel_TimelineEvents_SelectByTimeline" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TimelineId" Type="uniqueidentifier" Mode="In" />
         </Function>
@@ -111,6 +114,9 @@
             <Parameter Name="EventName" Mode="In" Type="String" />
             <Parameter Name="EventLocation" Mode="In" Type="String" />
             <Parameter Name="EventYear" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_sel_SingleMedia" ReturnType="Collection(HomeUnknownModel.sp_sel_SingleMedia_Result)">
+            <Parameter Name="ContentId" Mode="In" Type="Guid" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_sel_EventContent_Result">
@@ -174,6 +180,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sp_sel_SingleMedia_Result">
+          <Property Type="Guid" Name="Content_PK" Nullable="false" />
+          <Property Type="String" Name="ContentName" Nullable="false" MaxLength="200" />
+          <Property Type="Guid" Name="Event_PK" Nullable="false" />
+          <Property Type="String" Name="ContentText" Nullable="true" />
+          <Property Type="Int32" Name="ContentType" Nullable="false" />
+          <Property Type="String" Name="ContentURL" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -244,6 +258,18 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_ins_EventContent" FunctionName="HomeUnknownModel.Store.sp_ins_EventContent" />
           <FunctionImportMapping FunctionImportName="sp_ins_TimelineEvent" FunctionName="HomeUnknownModel.Store.sp_ins_TimelineEvent" />
+          <FunctionImportMapping FunctionImportName="sp_sel_SingleMedia" FunctionName="HomeUnknownModel.Store.sp_sel_SingleMedia">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HomeUnknownModel.sp_sel_SingleMedia_Result">
+                <ScalarProperty Name="Content_PK" ColumnName="Content_PK" />
+                <ScalarProperty Name="ContentName" ColumnName="ContentName" />
+                <ScalarProperty Name="Event_PK" ColumnName="Event_PK" />
+                <ScalarProperty Name="ContentText" ColumnName="ContentText" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ContentURL" ColumnName="ContentURL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

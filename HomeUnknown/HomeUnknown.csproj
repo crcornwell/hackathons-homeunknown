@@ -235,6 +235,9 @@
     <Compile Include="sp_sel_EventContent_Result.cs">
       <DependentUpon>HomeUnknownDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_sel_SingleMedia_Result.cs">
+      <DependentUpon>HomeUnknownDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_sel_TimelineEvents_SelectByTimeline_Result.cs">
       <DependentUpon>HomeUnknownDBModel.tt</DependentUpon>
     </Compile>

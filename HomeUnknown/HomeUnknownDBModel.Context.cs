@@ -103,5 +103,14 @@ namespace HomeUnknown
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ins_TimelineEvent", timelineIdParameter, eventNameParameter, eventLocationParameter, eventYearParameter);
         }
+    
+        public virtual ObjectResult<sp_sel_SingleMedia_Result> sp_sel_SingleMedia(Nullable<System.Guid> contentId)
+        {
+            var contentIdParameter = contentId.HasValue ?
+                new ObjectParameter("ContentId", contentId) :
+                new ObjectParameter("ContentId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_sel_SingleMedia_Result>("sp_sel_SingleMedia", contentIdParameter);
+        }
     }
 }
