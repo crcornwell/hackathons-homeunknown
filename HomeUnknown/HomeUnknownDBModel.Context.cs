@@ -30,6 +30,8 @@ namespace HomeUnknown
         public virtual DbSet<tbl_Contents> tbl_Contents { get; set; }
         public virtual DbSet<tbl_Events> tbl_Events { get; set; }
         public virtual DbSet<tbl_Timelines> tbl_Timelines { get; set; }
+        public virtual DbSet<tbl_relUserContent> tbl_relUserContent { get; set; }
+        public virtual DbSet<tbl_Users> tbl_Users { get; set; }
     
         public virtual ObjectResult<sp_sel_EventContent_Result> sp_sel_EventContent(Nullable<System.Guid> eventId)
         {
@@ -111,6 +113,15 @@ namespace HomeUnknown
                 new ObjectParameter("ContentId", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_sel_SingleMedia_Result>("sp_sel_SingleMedia", contentIdParameter);
+        }
+    
+        public virtual ObjectResult<string> sp_sel_UserPicture(Nullable<System.Guid> contentId)
+        {
+            var contentIdParameter = contentId.HasValue ?
+                new ObjectParameter("ContentId", contentId) :
+                new ObjectParameter("ContentId", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_sel_UserPicture", contentIdParameter);
         }
     }
 }

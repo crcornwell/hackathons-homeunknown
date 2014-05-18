@@ -252,7 +252,13 @@
     <Compile Include="tbl_Events.cs">
       <DependentUpon>HomeUnknownDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbl_relUserContent.cs">
+      <DependentUpon>HomeUnknownDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbl_Timelines.cs">
+      <DependentUpon>HomeUnknownDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_Users.cs">
       <DependentUpon>HomeUnknownDBModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

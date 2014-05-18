@@ -86,6 +86,16 @@ namespace HomeUnknown.Controllers
                     model.ContentType = (ContentType)media.ContentType;
                     model.EventId = eventId;
 
+                    //if (model.Id != null)
+                    //{
+                    //    var userPic = entityHelper.sp_sel_UserPicture(model.Id);
+
+                    //    if(userPic != null)
+                    //    {
+                    //        model.UserURL = new Uri(userPic.First().UserPicURL);
+                    //    }
+                    //}
+
                     contents.Add(model);
                 }
             }
@@ -112,6 +122,16 @@ namespace HomeUnknown.Controllers
                 model.EventId = singleMedia.First().Event_PK;
                 model.NoteText = singleMedia.First().ContentText;
                 model.ContentType = (ContentType)singleMedia.First().ContentType;
+
+                //if (model.Id != null)
+                //{
+                //    var userPic = entityHelper.sp_sel_UserPicture(model.Id);
+
+                //    if (userPic != null)
+                //    {
+                //        model.UserURL = new Uri(userPic.First().UserPicURL);
+                //    }
+                //}
             }
             return model;
         }
