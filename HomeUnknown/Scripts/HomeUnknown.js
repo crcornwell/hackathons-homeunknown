@@ -41,8 +41,8 @@
     success(function (data) {
         $scope.events = data;
     });
-    $scope.addContent = function(eventId) {
-
+    $scope.addContent = function() {
+        $http({ method: 'POST', url: '/api/content/', data: $('#add-content-form').serialize() });
     }
 })
 

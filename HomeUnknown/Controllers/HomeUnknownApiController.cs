@@ -55,7 +55,7 @@ namespace HomeUnknown.Controllers
                     events.Add(model);
                 }
             }
-            return events;
+            return events.OrderBy(x => x.Year).ToList();
         }
 
         [HttpGet]

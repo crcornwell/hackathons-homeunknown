@@ -11,6 +11,14 @@ namespace HomeUnknown.Models
 
         public DateTime Year { get; set; }
 
+        public string Date
+        {
+            get
+            {
+                return this.Year.Year.ToString();
+            }
+        }
+
         public Guid TimelineId { get; set; }
 
     }

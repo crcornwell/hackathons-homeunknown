@@ -8,6 +8,13 @@
     <meta charset="utf-8" />
     <title>Home Unknown</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="~/Content/js/AnimOnScroll.js"></script>
+    <script src="~/Content/js/classie.js"></script>
+    <link href="~/Content/js/component.css" rel="stylesheet" />
+    <link href="~/Content/css/default.css" rel="stylesheet" />
+    <script src="~/Content/js/modernizr.custom.js"></script>
+    <script src="~/Content/js/imagesloaded.js"></script>
+    <script src="~/Content/js/masonry.pkgd.min.js"></script>
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     <script src="~/Content/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width" />
@@ -33,7 +40,7 @@
         <div class="container">
             <div class="row">
                 <ul class="events-list list-inline">
-                    <li ng-repeat="event in events"><a href="#/contents/{{event.id}}/{{event.timelineId}}"><div></div></a></li>
+                    <li ng-repeat="event in events"><a href="#/contents/{{event.id}}/{{event.timelineId}}"><div data-toggle="popover" data-placement="bottom" data-content="{{event.name}}">{{event.Date}}</div></a></li>
                 </ul>
             </div>
         </div>
@@ -43,15 +50,63 @@
         <div class="container">
             <div class="row">
                 <ul class="events-list list-inline">
-                    <li ng-repeat="event in events"><a href="#/contents/{{event.id}}/{{event.timelineId}}"><div></div></a></li>
+                    <li ng-repeat="event in events"><a href="#/contents/{{event.id}}/{{event.timelineId}}"><div data-toggle="popover" data-placement="bottom" data-content="{{event.name}}">{{event.Date}}</div></a></li>
                 </ul>
             </div>
             <div class="row" id="content-panel">
-                <button class="add-new-content btn btn-default" data-toggle="modal" data-target="#add-content-modal">Add Content</button>
-                <ul class="events-list list-inline">
-                    <li ng-repeat="content in contents"><a href="#/content/{{content.id}}"><div>{{content.name}}</div></a></li>
+                <ul class="contents-list list-inline grid effect-2" id="grid">
+                    <li ng-repeat="content in contents" class="animate"><a href="#/content/{{content.id}}"><div></div></a></li>
                 </ul>
+                <button class="add-new-content btn btn-default" data-event="{{eventID}}" data-toggle="modal" data-target="#add-content-modal">Add Content</button>
             </div>
+            <div class="modal fade" id="add-content-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Add New Content</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="add-content-form" class="form-horizontal" role="form" ng-submit="addContent()">
+                                <input type="hidden" name="eventid" value="{{eventID}}" />
+                                <div class="form-group">
+                                    <label for="name" class="control-label col-sm-4" style="text-align:center">Content Name</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" placeholder="Name" name="name" id="contentname" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contenttype" class="control-label col-sm-4" style="text-align:center">Content Type</label>
+                                    <div class="col-sm-8">
+                                        <select name="contenttype" class="form-control">
+                                            @foreach (var item in (ContentType[])Enum.GetValues(typeof(ContentType)).Cast<ContentType>())
+                                            {
+                                                <option value="@item">@item</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="notetext" class="control-label col-sm-4" style="text-align:center">Text/Description (optional)</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="notetext" id="text" class="form-control" placeholder="Description" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contenturl" class="control-label col-sm-4" style="text-align:center">Content URL (optional)</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="contenturl" id="url" placeholder="URL" class="form-control" />
+                                    </div>
+                                </div>
+</form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" form="add-content-form" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
         </div>
     </script>
 
@@ -64,8 +119,9 @@
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Welcome Steven</a></li>
-                    <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank"><i class="glyphicon glyphicon-inbox"></i></a></li>
+                    <li><a href="#" target="_blank">Welcome Stephen</a></li>
+                    <li><a href="#" target="_blank"><i class="glyphicon glyphicon-inbox"></i></a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-log-out"></i> Log Out</a></li>
                 </ul>
             </div>
         </div>
@@ -76,23 +132,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="add-content-modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Add New Content</h4>
-                </div>
-                <div class="modal-body">
-                    <p>One fine body&hellip;</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    <script>
 
+    </script>
 </body>
 </html>
