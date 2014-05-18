@@ -50,6 +50,9 @@
     $http({ method: 'GET', url: '/api/events/' + $routeParams.timelineId }).
     success(function (data) {
         $scope.events = data;
-
+        $('#timelinejs').show();
+        timeline = new VMM.Timeline();
+        timeline.init();
+        $('.vco-slider').hide();
     });
 });
