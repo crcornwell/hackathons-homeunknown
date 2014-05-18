@@ -29,7 +29,31 @@ namespace HomeUnknown.Controllers
         [Route("events/{timelineId}")]
         public string GetEvents(Guid timelineId)
         {
-            List<EventModel> events = new List<EventModel>();//GetFromSQL(timelineId);
+            List<EventModel> events = null;
+
+            HomeUnknownEntities entityHelper = new HomeUnknownEntities();
+
+            var timelineEventsFromDb = entityHelper.sp_sel_TimelineEvents_SelectByTimeline(timelineId);
+
+            if (timelineEventsFromDb != null)
+            {
+                foreach (var timelineEvent in timelineEventsFromDb)
+                {
+                    if (events == null)
+                    {
+                        events = new List<EventModel>();
+                    }
+
+                    EventModel model = new EventModel();
+                    model.Id = timelineEvent.Event_PK;
+                    model.Name = timelineEvent.EventName;
+                    model.Location = timelineEvent.EventLocation;
+                    model.Year = timelineEvent.EventYear;
+                    model.TimelineId = timelineId;
+
+                    events.Add(model);
+                }
+            }
             return JsonConvert.SerializeObject(events);
         }
 
@@ -37,11 +61,34 @@ namespace HomeUnknown.Controllers
         [Route("contents/{eventId}")]
         public string GetContents(Guid eventId)
         {
-            List<ContentModel> contents = new List<ContentModel>(); // GetFromSQL(eventId);
+            List<ContentModel> contents = null; // GetFromSQL(eventId);
+
+            HomeUnknownEntities entityHelper = new HomeUnknownEntities();
+
+            var eventContent = entityHelper.sp_sel_EventContent(eventId);
+
+            if (eventContent != null)
+            {
+                foreach (var media in eventContent)
+                {
+                    if (contents == null)
+                    {
+                        contents = new List<ContentModel>();
+                    }
+
+                    ContentModel model = new ContentModel();
+
+                    model.Id = media.Content_PK;
+                    model.Name = media.ContentName;
+                    model.ContentURL = new Uri(media.ContentURL);
+                    model.NoteText = media.ContentText;
+                    model.ContentType = (ContentType)media.ContentType;
+                    model.EventId = eventId;
+
+                    contents.Add(model);
+                }
+            }
             return JsonConvert.SerializeObject(contents);
         }
-
-
-
     }
 }

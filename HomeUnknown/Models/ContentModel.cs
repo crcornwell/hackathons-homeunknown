@@ -7,13 +7,13 @@ namespace HomeUnknown.Models
 {
     public class ContentModel : RecordModel
     {
-        Uri ContentURL { get; set; }
+        public Uri ContentURL { get; set; }
 
-        string NoteText { get; set; }
+        public string NoteText { get; set; }
 
-        Guid EventId { get; set; }
+        public Guid EventId { get; set; }
 
-        ContentType ContentType { get; set; }
+        public ContentType ContentType { get; set; }
 
     }
 }

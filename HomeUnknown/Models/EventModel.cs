@@ -7,11 +7,11 @@ namespace HomeUnknown.Models
 {
     public class EventModel : RecordModel
     {
-        string Location { get; set; }
+        public string Location { get; set; }
 
-        DateTime Year { get; set; }
+        public DateTime Year { get; set; }
 
-        Guid TimelineId { get; set; }
+        public Guid TimelineId { get; set; }
 
     }
 }
