@@ -35,10 +35,6 @@
     });
 })
 
-.run(function ($state) {
-    //$state.go('timelines');
-})
-
 .controller('TimelineCtrl', function ($scope, $http) {
     $http({ method: 'GET', url: '/api/timelines/0' }).
     success(function (data) {
