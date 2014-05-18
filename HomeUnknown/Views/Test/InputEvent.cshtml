@@ -1,0 +1,54 @@
+﻿@model HomeUnknown.Models.EventModel
+
+@*@{
+    ViewBag.Title = "InputEvent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+<h2>InputEvent</h2>
+
+<form id="inputform">
+    <input type="hidden" name="timelineid" value="06AE6ABB-0296-4F10-B6AF-3B13FE9B4FCF" />
+    <label for="name">
+        Event Name
+        <input type="text" name="name" id="eventname" />
+    </label>
+    <br />
+    <label for="location">
+        Location
+        <input type="text" name="location" id="location" />
+    </label>
+    <br />
+    <label for="year">
+        Event Date
+        <input type="text" name="year" id="eventyear" />
+    </label>
+    <br />
+    <button type="button" id="submitButton">Submit</button>
+</form>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            SubmitEvent();
+        });
+
+        function SubmitEvent() {
+            $("#submitButton").bind("click", function (e) {
+                e.preventDefault();
+
+                var formData = $("#inputform").serialize();
+
+                $.post('/api/events', formData).done(function (data) {
+                    alert(data);
+                });
+            });
+        }
+
+
+    </script>
+
+}
