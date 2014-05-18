@@ -1,27 +1,42 @@
 ﻿angular.module('homeUnknown', ['ngRoute', 'ui.router'])
 
-.config(function ($routeProvider) {
-    $routeProvider
-    .when('/', {
-        controller: 'TimelineCtrl',
-        templateUrl: 'timelines.html'
-    })
-    .when('/contents/:eventId/:timelineId', {
-        controller: 'ContentsCtrl',
-        templateUrl: 'contents.html'
-    })
-    .when('/events/:timelineId', {
-        controller: 'EventsCtrl',
-        templateUrl: 'events.html'
-    });
-})
+//.config(function ($routeProvider) {
+//    $routeProvider
+//    .when('/', {
+//        controller: 'TimelineCtrl',
+//        templateUrl: 'timelines.html'
+//    })
+//    .when('/contents/:eventId/:timelineId', {
+//        controller: 'ContentsCtrl',
+//        templateUrl: 'contents.html'
+//    })
+//    .when('/events/:timelineId', {
+//        controller: 'EventsCtrl',
+//        templateUrl: 'events.html'
+//    });
+//})
 
 .config(function ($stateProvider) {
     $stateProvider
-    .state('contents', {
-        templateUrl: 'contents.html',
-        controller: 'ContentsCtrl'
+    .state('timelines', {
+        url: '/',
+        controller: 'TimelineCtrl',
+        templateUrl: 'timelines.html'
     })
+    .state('events', {
+        url: '/timelines/:timelineId/events',
+        controller: 'EventsCtrl',
+        templateUrl: 'events.html'
+    })
+    .state('events.contents', {
+        url: '/:eventId/contents',
+        controller: 'ContentsCtrl',
+        templateUrl: 'contents.html'
+    });
+})
+
+.run(function ($state) {
+    //$state.go('timelines');
 })
 
 .controller('TimelineCtrl', function ($scope, $http) {
@@ -31,25 +46,20 @@
     })
 })
 
-.controller('ContentsCtrl', function ($scope, $http, $routeParams) {
-    $http({ method: 'GET', url: 'api/contents/' + $routeParams.eventId }).
+.controller('ContentsCtrl', function ($scope, $http, $stateParams) {
+    $http({ method: 'GET', url: 'api/contents/' + $stateParams.eventId }).
     success(function (data) {
         $scope.contents = data;
-        $scope.eventID = $routeParams.eventId;
-    });
-    $http({ method: 'GET', url: 'api/events/' + $routeParams.timelineId }).
-    success(function (data) {
-        $scope.events = data;
+        $scope.eventID = $stateParams.eventId;
     });
     $scope.addContent = function() {
         $http({ method: 'POST', url: '/api/content/', data: $('#add-content-form').serialize() });
     }
 })
 
-.controller('EventsCtrl', function ($scope, $http, $routeParams) {
-    $http({ method: 'GET', url: '/api/events/' + $routeParams.timelineId }).
+.controller('EventsCtrl', function ($scope, $http, $state, $stateParams) {
+    $http({ method: 'GET', url: '/api/events/' + $stateParams.timelineId }).
     success(function (data) {
         $scope.events = data;
-
     });
 });

@@ -29,7 +29,9 @@
         <div>
             <ul class="list-inline timeline-list">
                 <li class="list-inline" ng-repeat="timeline in timelines">
-                    <a href="#/events/{{timeline.id}}"><img src="{{timeline.pictureURL}}" /></a>
+                    <a ui-sref="events({ timelineId: timeline.id })">
+                        <img ng-src="{{timeline.pictureURL}}" />
+                    </a>
                     <p>{{timeline.name}}</p>
                 </li>
             </ul>
@@ -40,22 +42,27 @@
         <div class="container">
             <div class="row">
                 <ul class="events-list list-inline">
-                    <li ng-repeat="event in events"><a href="#/contents/{{event.id}}/{{event.timelineId}}"><div data-toggle="popover" data-placement="bottom" data-content="{{event.name}}">{{event.Date}}</div></a></li>
+                    <li ng-repeat="event in events">
+                        <a ui-sref="events.contents({ eventId: event.id })">
+                            <div data-toggle="popover" data-placement="bottom" data-content="{{event.name}}">{{event.Date}}</div>
+                        </a>
+                    </li>
                 </ul>
             </div>
+            <div ui-view></div>
         </div>
     </script>
 
     <script type="text/ng-template" id="contents.html">
         <div class="container">
-            <div class="row">
-                <ul class="events-list list-inline">
-                    <li ng-repeat="event in events"><a href="#/contents/{{event.id}}/{{event.timelineId}}"><div data-toggle="popover" data-placement="bottom" data-content="{{event.name}}">{{event.Date}}</div></a></li>
-                </ul>
-            </div>
             <div class="row" id="content-panel">
                 <ul class="contents-list list-inline grid effect-2" id="grid">
-                    <li ng-repeat="content in contents" class="animate"><a href="#/content/{{content.id}}"><div></div></a></li>
+                    <!-- ngRepeat: content in contents -->
+                    <li ng-repeat="content in contents" class="animate ng-scope">
+                        <a ui-sref="events.contents.detail({ contentId: content.id })">
+                            <pre style="text-align: left; font-size: .75em">{{content | json}}</pre>
+                        </a>
+                    </li>
                 </ul>
                 <button class="add-new-content btn btn-default" data-event="{{eventID}}" data-toggle="modal" data-target="#add-content-modal">Add Content</button>
             </div>
@@ -115,7 +122,7 @@
     <div class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <a href="../" class="navbar-brand">Home Unknown</a>
+                <a href="#/" class="navbar-brand">Home Unknown</a>
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav navbar-right">
@@ -127,11 +134,10 @@
         </div>
     </div>
     <div class="container">
-        <div class="row clearfix" ng-view>
-            
+        <div class="row clearfix" ui-view>
+
         </div>
     </div>
-
     <script>
 
     </script>
