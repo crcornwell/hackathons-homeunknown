@@ -1,0 +1,23 @@
+﻿.timeline-list {
+    text-align: center;
+    margin-top: 175px;
+}
+
+.timeline-list > li {
+    margin: 50px;
+}
+
+.timeline-list > li > a > img {
+    border-radius: 200px;
+    width: 200px;
+    height: 200px;
+    transition: all .5s;
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+}
+
+.timeline-list > li > a > img:hover {
+    cursor: pointer;
+    width: 210px;
+    height: 210px;
+}
