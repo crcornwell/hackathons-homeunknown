@@ -64,8 +64,13 @@ namespace HomeUnknown
                 , "~/Scripts/morphbuttons/uiMorphingButton_inflow.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                 "~/Content/bootstrap.css",
-                 "~/Content/Site.css"));
+                 "~/Content/css/bootstrap.css"
+                 , "~/Content/css/site.css"
+                 , "~/Content/css/component.css"
+                 , "~/Content/css/content.css"
+                 , "~/Content/css/demo.css"
+                 , "~/Content/css/normalize.css"
+                 ));
         }
     }
 }
