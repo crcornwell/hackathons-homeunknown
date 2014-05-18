@@ -57,5 +57,51 @@ namespace HomeUnknown
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_sel_TimelineHome_Select_Result>("sp_sel_TimelineHome_Select", familyIDParameter);
         }
+    
+        public virtual int sp_ins_EventContent(Nullable<System.Guid> eventId, string contentName, string contentText, Nullable<int> contentType, string contentURL)
+        {
+            var eventIdParameter = eventId.HasValue ?
+                new ObjectParameter("EventId", eventId) :
+                new ObjectParameter("EventId", typeof(System.Guid));
+    
+            var contentNameParameter = contentName != null ?
+                new ObjectParameter("ContentName", contentName) :
+                new ObjectParameter("ContentName", typeof(string));
+    
+            var contentTextParameter = contentText != null ?
+                new ObjectParameter("ContentText", contentText) :
+                new ObjectParameter("ContentText", typeof(string));
+    
+            var contentTypeParameter = contentType.HasValue ?
+                new ObjectParameter("ContentType", contentType) :
+                new ObjectParameter("ContentType", typeof(int));
+    
+            var contentURLParameter = contentURL != null ?
+                new ObjectParameter("ContentURL", contentURL) :
+                new ObjectParameter("ContentURL", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ins_EventContent", eventIdParameter, contentNameParameter, contentTextParameter, contentTypeParameter, contentURLParameter);
+        }
+    
+        public virtual int sp_ins_TimelineEvent(Nullable<System.Guid> timelineId, string eventName, string eventLocation, Nullable<System.DateTime> eventYear)
+        {
+            var timelineIdParameter = timelineId.HasValue ?
+                new ObjectParameter("TimelineId", timelineId) :
+                new ObjectParameter("TimelineId", typeof(System.Guid));
+    
+            var eventNameParameter = eventName != null ?
+                new ObjectParameter("EventName", eventName) :
+                new ObjectParameter("EventName", typeof(string));
+    
+            var eventLocationParameter = eventLocation != null ?
+                new ObjectParameter("EventLocation", eventLocation) :
+                new ObjectParameter("EventLocation", typeof(string));
+    
+            var eventYearParameter = eventYear.HasValue ?
+                new ObjectParameter("EventYear", eventYear) :
+                new ObjectParameter("EventYear", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ins_TimelineEvent", timelineIdParameter, eventNameParameter, eventLocationParameter, eventYearParameter);
+        }
     }
 }
