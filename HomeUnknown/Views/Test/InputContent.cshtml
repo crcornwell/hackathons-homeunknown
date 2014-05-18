@@ -1,0 +1,62 @@
+﻿@model HomeUnknown.Models.ContentModel
+@{
+    ViewBag.Title = "InputContent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>InputContent</h2>
+
+<form id="inputform">
+    <input type="hidden" name="eventid" value="C1B74389-A289-4C1B-BE38-1E49BAC68158" />
+    <label for="name">
+        Content Name
+        <input type="text" name="name" id="contentname" />
+    </label>
+    <br />
+    <label for="contenttype">
+        Content Type
+        @foreach (var item in (ContentType[])Enum.GetValues(typeof(ContentType)).Cast<ContentType>())
+        {   
+            <br />
+            <input type="radio" name="contenttype" value="@item" /> @item
+        }
+    </label>
+    <br />
+    <label for="notetext">
+        Text/Description
+        <input type="text" name="notetext" id="text" />
+    </label>
+    <br />
+    <label for="contenturl">
+        Content URL (optional)
+        <input type="text" name="contenturl" id="url" />
+    </label>
+    <br />
+    <button type="button" id="submitButton">Submit</button>
+</form>
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            SubmitEvent();
+        });
+
+        function SubmitEvent() {
+            $("#submitButton").bind("click", function (e) {
+                e.preventDefault();
+
+                var formData = $("#inputform").serialize();
+
+                $.post('/api/content/', formData).done(function (data) {
+                    alert(data);
+                });
+            });
+        }
+
+
+    </script>
+
+}

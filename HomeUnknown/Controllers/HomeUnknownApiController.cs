@@ -144,6 +144,8 @@ namespace HomeUnknown.Controllers
             return resp;
         }
 
+        [HttpPost]
+        [Route("content")]
         public HttpResponseMessage InsertContent(ContentModel model)
         {
             HttpResponseMessage resp = new HttpResponseMessage();
@@ -157,9 +159,16 @@ namespace HomeUnknown.Controllers
                 try
                 {
                     HomeUnknownEntities entityHelper = new HomeUnknownEntities();
-                    entityHelper.sp_ins_EventContent(model.EventId, model.Name, model.NoteText, (int)model.ContentType, model.ContentURL.ToString());
 
-                    resp = Request.CreateResponse(HttpStatusCode.OK);
+                    string urlString = null;
+
+                    if (model.ContentURL != null)
+                    {
+                        urlString = model.ContentURL.ToString();
+                    }
+                    entityHelper.sp_ins_EventContent(model.EventId, model.Name, model.NoteText, (int)model.ContentType, !string.IsNullOrEmpty(urlString) ? urlString : "");
+
+                    resp = Request.CreateResponse(HttpStatusCode.OK, "Success!");
                 }
                 catch (Exception ex)
                 {

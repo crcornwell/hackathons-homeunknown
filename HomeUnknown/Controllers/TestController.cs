@@ -13,5 +13,10 @@ namespace HomeUnknown.Controllers
         {
             return View();
         }
+
+        public ActionResult InputContent()
+        {
+            return View();
+        }
     }
 }
