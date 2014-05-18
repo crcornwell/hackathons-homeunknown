@@ -47,21 +47,16 @@
     <script type="text/ng-template" id="events.html">
         <div class="container">
             <div class="row">
-                
+                <a href="#/contents/{{event.id}}/{{event.timelineId}}" ng-repeat="event in events">click</a>
             </div>
         </div>
     </script>
 
     <script type="text/ng-template" id="contents.html">
         <div class="container">
-            <div class="row">
-                <ul class="events-list list-inline">
-                    <li ng-repeat="event in events"><a href="#/contents/{{event.id}}/{{event.timelineId}}"><div data-toggle="popover" data-placement="bottom" data-content="{{event.name}}">{{event.Date}}</div></a></li>
-                </ul>
-            </div>
             <div class="row" id="content-panel">
-                <ul class="contents-list list-inline grid effect-2" id="grid">
-                    <li ng-repeat="content in contents" class="animate"><a href="#/content/{{content.id}}"><div></div></a></li>
+                <ul class="contents-list list-inline grid.effect2" id="grid">
+                    <li ng-repeat="content in contents"><div data-title="{{content.name}}" data-url="{{content.ContentURL}}"><img src={{content.ContentURL}}/><p>{{content.name}}</p></div></li>
                 </ul>
                 <button class="add-new-content btn btn-default" data-event="{{eventID}}" data-toggle="modal" data-target="#add-content-modal">Add Content</button>
             </div>
@@ -113,6 +108,25 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
+
+            <div class="modal fade" id="content-modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title content-modal-title"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <video></video>
+                            <img />
+                            <p class="content-modal-text"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
         </div>
     </script>
 
@@ -157,18 +171,15 @@
 
             var eventObjects = [];
 
-            var eventObjects = [@foreach( var item in Model) {
-                                    @Html.Raw(Json.Encode(item));
-                                    @Html.Raw(",");
-                                }];
+            var eventObjects = @Html.Raw(Json.Encode(Model));
 
             var timelineObjects = [];
 
             function getTimelineObjects() {
                 for (var i in eventObjects) {
-                timelineObjects.push(createTimelineObject(eventObjects[i].Name, '2011,12,11', eventObjects[i].Name, eventObjects[i].Id));
+                    timelineObjects.push(createTimelineObject(eventObjects[i].Name, eventObjects[i].Date, eventObjects[i].Name, eventObjects[i].Id));
                 }
-                return timelineObjects;
+                return JSON.stringify(timelineObjects);
             }
 
 
@@ -190,6 +201,16 @@
             }
         </script>
         <script src="~/Scripts/timeline-steve.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('body').on('click', '.contents-list > li > div', function () {
+                    $('#content-modal').modal('show');
+                    $('#content-modal-title').html($(this).data('title'));
+                    $('.modal-body > video').attr('src', $(this).data('url'));
+                });
+            });
+
+        </script>
         <div class="row clearfix" ng-view>
 
         </div>

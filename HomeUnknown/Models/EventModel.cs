@@ -15,7 +15,7 @@ namespace HomeUnknown.Models
         {
             get
             {
-                return this.Year.ToShortDateString();
+                return String.Format("{0},{1},{2}", this.Year.Year, this.Year.Month, this.Year.Day);
             }
         }
 

@@ -50,14 +50,30 @@
     margin: 15px;
 }
 
-.contents-list > li > a > div {
+.contents-list > li > div {
     width: 200px;
-    height: 500px;
-    background-color:#641111;
+    height: 250px;
+    background-color:#ffffff;
+    transition: all .5s;
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+    text-align:center;
+
+}
+
+.contents-list > li  > div:hover {
+    background-color:#ffffff;
+    cursor: pointer;
+}
+
+.contents-list >li > div > p {
+    font-weight: bold;
+    margin-top: 20px;
 }
 
 #content-panel {
     text-align: center;
+    clear:both;
 }
 
 .navbar-default {
