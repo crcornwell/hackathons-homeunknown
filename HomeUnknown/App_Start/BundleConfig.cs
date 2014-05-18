@@ -57,6 +57,12 @@ namespace HomeUnknown
                 , "~/Scripts/arborsrc/tween/easing.js"
                 , "~/Scripts/arborsrc/tween/tween.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/morphButtons").Include(
+                "~/Scripts/morphbuttons/classie.js"
+                , "~/Scripts/morphbuttons/modernizr.custom.js"
+                , "~/Scripts/morphbuttons/uiMorphingButton_fixed.js"
+                , "~/Scripts/morphbuttons/uiMorphingButton_inflow.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                  "~/Content/bootstrap.css",
                  "~/Content/Site.css"));

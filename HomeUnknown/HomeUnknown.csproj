@@ -263,6 +263,10 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\component.css" />
+    <Content Include="Content\css\content.css" />
+    <Content Include="Content\css\demo.css" />
+    <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\site.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\js\bootstrap.js" />
@@ -322,6 +326,10 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\morphbuttons\classie.js" />
+    <Content Include="Scripts\morphbuttons\modernizr.custom.js" />
+    <Content Include="Scripts\morphbuttons\uiMorphingButton_fixed.js" />
+    <Content Include="Scripts\morphbuttons\uiMorphingButton_inflow.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\timeline.js" />
@@ -356,6 +364,7 @@
     <Content Include="Views\Home\View1.cshtml" />
     <Content Include="Views\Test\InputEvent.cshtml" />
     <Content Include="Views\Test\InputContent.cshtml" />
+    <Content Include="Views\Test\EventDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

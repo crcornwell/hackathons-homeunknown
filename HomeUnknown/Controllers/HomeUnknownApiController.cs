@@ -166,7 +166,8 @@ namespace HomeUnknown.Controllers
                     {
                         urlString = model.ContentURL.ToString();
                     }
-                    entityHelper.sp_ins_EventContent(model.EventId, model.Name, model.NoteText, (int)model.ContentType, !string.IsNullOrEmpty(urlString) ? urlString : "");
+
+                    entityHelper.sp_ins_EventContent(model.EventId, model.Name, model.NoteText ?? "", (int)model.ContentType, urlString ?? "");
 
                     resp = Request.CreateResponse(HttpStatusCode.OK, "Success!");
                 }
