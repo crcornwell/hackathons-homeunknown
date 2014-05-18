@@ -20,8 +20,8 @@ namespace HomeUnknown.Controllers
             //List<TimelineModel> timelines = GetFromSQL(familyID);
 
             List<TimelineModel> timelines = new List<TimelineModel>();
-            timelines.Add(new TimelineModel(DateTime.Now, new Uri("http://www.test.com/test"), Guid.NewGuid(), "Test"));
-            timelines.Add(new TimelineModel(DateTime.Now.AddYears(1), new Uri("http://www.comp.com/test"), Guid.NewGuid(), "Name"));
+            timelines.Add(new TimelineModel(DateTime.Now, new Uri("http://homeunknown.collabaxis.com/profilepics/lucilaprofile.jpg"), Guid.NewGuid(), "Lucila"));
+            timelines.Add(new TimelineModel(DateTime.Now.AddYears(1), new Uri("http://homeunknown.collabaxis.com/profilepics/oscarprofile.jpg"), Guid.NewGuid(), "Oscar"));
 
             return timelines;
         }

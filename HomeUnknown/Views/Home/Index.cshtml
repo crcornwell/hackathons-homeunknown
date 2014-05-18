@@ -3,35 +3,61 @@
     Response.Headers["X-UA-Compatible"] = "IE=10";
 }
 <!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="homeUnknown">
 <head>
     <meta charset="utf-8" />
     <title>Home Unknown</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/js/bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.min.js"></script>
-    <script src="/scripts/controllers/timelineController.js"></script>
-</head>
-<body>
-    <div ng-controller="timelineController">
-        <div ng-repeat="timeline in timelines">
-            <ul>
-                <li>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular-route.min.js"></script>
+    <link href="~/Content/css/site.css" rel="stylesheet" />
+    <script src="~/Scripts/HomeUnknown.js"></script>
+
+    <script type="text/ng-template" id="timelines.html">
+        <div>
+            <ul class="list-inline timeline-list">
+                <li class="list-inline" ng-repeat="timeline in timelines">
+                    <a href="#/events/{{timeline.id}}"><img src="{{timeline.pictureURL}}" /></a>
                     <p>{{timeline.name}}</p>
-                </li>
-                <li>
-                    <p>{{timeline._BeginningYear}}</p>
-                </li>
-                <li>
-                    <img src="{{timeline.pictureurl}}"/>
                 </li>
             </ul>
         </div>
+    </script>
 
+    <script type="text/ng-template" id="events.html">
+        <div>
+            <ul class="list-inline timeline-list">
+                <li class="list-inline" ng-repeat="event in events">
+                    <a href="#/events/{{event.id}}"><img src="{{event.pictureURL}}" /></a>
+                    <p>{{event.name}}</p>
+                </li>
+            </ul>
+        </div>
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="../" class="navbar-brand">Home Unknown</a>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="http://builtwithbootstrap.com/" target="_blank">Welcome Steven</a></li>
+                    <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank"><i class="glyphicon glyphicon-inbox"></i></a></li>
+                </ul>
+
+            </div>
+        </div>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-
+    <div class="container">
+        <div class="row clearfix" ng-view>
+            
+        </div>
+    </div>
 </body>
 </html>
