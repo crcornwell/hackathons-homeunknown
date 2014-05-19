@@ -141,7 +141,7 @@
           <EntitySet Name="tbl_relUserContent" EntityType="HomeUnknownModel.tbl_relUserContent" />
           <EntitySet Name="tbl_Users" EntityType="HomeUnknownModel.tbl_Users" />
           <FunctionImport Name="sp_sel_UserPicture" ReturnType="Collection(String)">
-            <Parameter Name="ContentId" Mode="In" Type="Guid" />
+          <Parameter Name="ContentId" Mode="In" Type="Guid" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_sel_EventContent_Result">
