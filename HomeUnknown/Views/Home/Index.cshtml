@@ -189,44 +189,21 @@
             arrayOfOutputEventHashes.push(outputEventHash);</text>
             }
 
-            var stringName = JSON.stringify(arrayOfOutputEventHashes);
-            stringName = stringName.replace(/\//g,"");
-
-            //alert(stringName);
-
             var finalOutputHashForTimelineJS = {
 
                 "timeline":
                 {
-                    "headline":"Home Unknown",
+                    //"headline":"Home Unknown",
                     "type":"default",
                     "text":"<p>Intro body text goes here, some HTML is ok</p>",
-                    "date": stringName
+                    "date": arrayOfOutputEventHashes
                 }
             }
-
-            var noMoreSlashes = JSON.stringify(finalOutputHashForTimelineJS);
-
-            noMoreSlashes = noMoreSlashes.replace(/\\/g,"");
-
-            console.log(noMoreSlashes);
-
-            //alert(finalOutputHashForTimelineJS);
-
-            //var timelineObjects = [];
-
-            //function getTimelineObjects() {
-            //    for (var i in eventObjects) {
-            //        timelineObjects.push(createTimelineObject(eventObjects[i].Name, eventObjects[i].Date, eventObjects[i].Name, eventObjects[i].Id));
-            //    }
-            //    //alert(JSON.stringify(timelineObjects));
-            //}
-
 
             var timeline_config = {
                 width: '100%',
                 height: '600',
-                source: noMoreSlashes,
+                source: finalOutputHashForTimelineJS,
                 embed_id: 'timelinejs',               //OPTIONAL USE A DIFFERENT DIV ID FOR EMBED
                 start_at_end: false,                          //OPTIONAL START AT LATEST DATE
                 start_at_slide: '4',                            //OPTIONAL START AT SPECIFIC SLIDE
