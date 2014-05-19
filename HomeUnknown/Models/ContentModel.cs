@@ -17,5 +17,7 @@ namespace HomeUnknown.Models
 
         public Uri UserURL { get; set; }
 
+        public string UserName { get; set; }
+
     }
 }

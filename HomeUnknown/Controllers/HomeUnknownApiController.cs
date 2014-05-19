@@ -86,6 +86,7 @@ namespace HomeUnknown.Controllers
                     model.ContentType = (ContentType)media.ContentType;
                     model.EventId = eventId;
 
+                    
                     //if (model.Id != null)
                     //{
                     //    var userPic = entityHelper.sp_sel_UserPicture(model.Id);

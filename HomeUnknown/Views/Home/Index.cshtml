@@ -56,7 +56,7 @@
             </div>
             <div class="row" id="content-panel">
                 <ul class="contents-list list-inline grid.effect2" id="grid">
-                    <li ng-repeat="content in contents"><div data-title="{{content.name}}" data-desc={{content.noteText}} data-type={{content.contentType}} data-url="{{content.contentURL}}"><p>{{content.name}}</p><img class="thumbnail-image" src={{content.contentURL}}></div></li>
+                    <li ng-repeat="content in contents"><div data-title="{{content.name}}" data-desc={{content.noteText}} data-type={{content.contentType}} data-username={{content.userName}} data-url="{{content.contentURL}}"><p>{{content.name}}</p><img class="thumbnail-image" src={{content.contentURL}}></div></li>
                 </ul>
                 <button class="add-new-content btn btn-default" data-event="eventID" data-toggle="modal" data-target="#add-content-modal">Add Content</button>
             </div>
@@ -120,6 +120,8 @@
                             <iframe hidden src="//player.vimeo.com/video/VIDEO_ID" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                             <img class="content-image" hidden/>
                             <p class="content-modal-text"></p>
+                            <hr />
+                            <p class="content-modal-name"></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default close-content-modal" data-dismiss="modal">Close</button>
@@ -228,6 +230,7 @@
                         $('.modal-body > img').attr('src', $(this).data('url'));
                         $('.modal-body > img').show();
                         $('.content-modal-text').html($(this).data('desc'));
+                        $('.content-modal-name').html($(this).data('username'));
                     $('#content-modal').modal('show');
                 });
 
