@@ -2,7 +2,7 @@
 @{
     Layout = null;
     Response.Headers["X-UA-Compatible"] = "IE=10";
-    
+
 }
 
 
@@ -31,7 +31,7 @@
     <link href="~/Content/css/site.css" rel="stylesheet" />
 
     <script src="~/Scripts/HomeUnknown.js"></script>
-    
+
 
     <script type="text/ng-template" id="timelines.html">
         <div class="people-list">
@@ -93,7 +93,7 @@
                                         <select name="contenttype" class="form-control">
                                             @foreach (var item in (ContentType[])Enum.GetValues(typeof(ContentType)).Cast<ContentType>())
                                             {
-                                                <option value="@item">@item</option>
+                                            <option value="@item">@item</option>
                                             }
                                         </select>
                                     </div>
@@ -110,7 +110,7 @@
                                         <input type="text" name="contenturl" id="url" placeholder="URL" class="form-control" />
                                     </div>
                                 </div>
-</form>
+                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="modal-body">
                             <iframe hidden src="//player.vimeo.com/video/VIDEO_ID" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                            <img class="content-image" hidden/>
+                            <img class="content-image" hidden />
                             <p class="content-modal-text"></p>
                         </div>
                         <div class="modal-footer">
@@ -143,8 +143,6 @@
 
 </head>
 <body>
-
-
     <div class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -159,7 +157,49 @@
             </div>
         </div>
     </div>
-    <div id="timelinejs" style="max-height:220px" hidden></div>
+    <button class="btn btn-lg" style="float:right" data-toggle="modal" data-target="#myModal">Add an Event</button>
+    <div id="timelinejs" style="max-height:220px; clear: both" hidden></div>
+    <div>
+
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Add New Event</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="add-event-form" class="form-horizontal" role="form" ng-submit="addEvent()">
+                            <input type="hidden" name="timelineid" value="06AE6ABB-0296-4F10-B6AF-3B13FE9B4FCF" />
+                            <div class="form-group">
+                                <label for="name" class="control-label col-sm-4" style="text-align:center">Event Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Name" name="name" id="eventname" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="location" class="control-label col-sm-4" style="text-align:center">Location</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Location" name="location" id="location" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="year" class="control-label col-sm-4" style="text-align:center">Date</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="year" id="eventyear" class="form-control" placeholder="Date" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" form="add-content-form" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+
+    </div>
     <div class="container">
         <div class="row">
         </div>
@@ -236,8 +276,8 @@
                         $('.modal-body > iframe').attr('src', $(this).data('url'));
                         $('.modal-body > iframe').show();
                     }
-                        $('.modal-body > img').attr('src', $(this).data('url'));
-                        $('.modal-body > img').show();
+                    $('.modal-body > img').attr('src', $(this).data('url'));
+                    $('.modal-body > img').show();
                     $('#content-modal').modal('show');
                 });
 
@@ -245,7 +285,22 @@
                     $('.modal-body > video > source').hide();
                     $('.modal-body > img').hide();
                 });
+
+                WireUpEventButton();
             });
+
+            function WireUpEventButton(){
+                
+                $("#myModal").bind("click",function(e){
+                    e.preventDefault();
+
+                    var formData = $("#add-event-form").serialize();
+
+                    $.post('/api/events', formData).done(function (data) {
+                        alert(data);
+                    });
+                });
+            }
 
         </script>
         <div class="row clearfix" ng-view>
