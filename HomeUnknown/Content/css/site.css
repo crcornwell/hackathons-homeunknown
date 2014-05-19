@@ -63,6 +63,7 @@
     -moz-transition: all .5s;
     -webkit-transition: all .5s;
     text-align:center;
+    overflow: hidden;
 
 }
 
@@ -73,17 +74,20 @@
 
 .contents-list >li > div > p {
     font-weight: bold;
-    padding-top: 10%;
+    padding-top: 5%;
+    margin: 10px;
 }
 
 img.content-image {
     max-width: 80%;
     text-align: center;
+    margin: 10px;
 }
 
 #content-panel {
     text-align: center;
     clear:both;
+    margin-top: 240px;
 }
 
 .navbar-default {

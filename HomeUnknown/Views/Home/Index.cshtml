@@ -46,28 +46,17 @@
 
     <script type="text/ng-template" id="events.html">
         <div class="container">
-            <div class="row">
-                <ul class="events-list list-inline">
-                    <li ng-repeat="event in events">
-                        <a href="#/contents/{{event.id}}/{{event.timelineId}}"><div data-tooltip="{{event.Date}}">{{event.Date}}</div></a>
-                    </li>
-                </ul>
-            </div>
+            <div class="row"></div>
         </div>
     </script>
 
     <script type="text/ng-template" id="contents.html">
         <div class="container">
             <div class="row">
-                <ul class="events-list list-inline">
-                    <li ng-repeat="event in events">
-                        <a href="#/contents/{{event.id}}/{{event.timelineId}}"><div data-tooltip="{{event.Date}}">{{event.Date}}</div></a>
-                    </li>
-                </ul>
             </div>
             <div class="row" id="content-panel">
                 <ul class="contents-list list-inline grid.effect2" id="grid">
-                    <li ng-repeat="content in contents"><div data-title="{{content.name}}" data-desc={{content.NoteText}} data-type={{content.ContentType}} data-url="{{content.contentURL}}"><p>{{content.name}}</p><img class="thumbnail-image" src={{content.contentURL}}></div></li>
+                    <li ng-repeat="content in contents"><div data-title="{{content.name}}" data-desc={{content.noteText}} data-type={{content.contentType}} data-url="{{content.contentURL}}"><p>{{content.name}}</p><img class="thumbnail-image" src={{content.contentURL}}></div></li>
                 </ul>
                 <button class="add-new-content btn btn-default" data-event="eventID" data-toggle="modal" data-target="#add-content-modal">Add Content</button>
             </div>
@@ -226,7 +215,7 @@
                 maptype: 'watercolor',                   //OPTIONAL MAP STYLE
             }
         </script>
-        <script src="http://homeunknown.collabaxis.com/demos/timeline-steve_t2.js"></script>
+        <script src="~/Scripts/timeline-js-steve-2.js"></script>
         @*<script src="~/Scripts/timeline-steve.js"></script>*@
         <script type="text/javascript">
             $(document).ready(function () {
@@ -238,6 +227,7 @@
                     }
                         $('.modal-body > img').attr('src', $(this).data('url'));
                         $('.modal-body > img').show();
+                        $('.content-modal-text').html($(this).data('desc'));
                     $('#content-modal').modal('show');
                 });
 
