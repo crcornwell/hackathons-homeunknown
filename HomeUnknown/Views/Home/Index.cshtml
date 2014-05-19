@@ -32,6 +32,14 @@
 
     <script src="~/Scripts/HomeUnknown.js"></script>
     
+    <script>
+        function show_youtube(youtube_url) {
+            // console.info('youtube try', youtube_url);
+            var id = youtube_url.split("?")[1].split("&")[0].split("=")[1];
+            // console.info('youtube try2', youtube_url, id);
+            jQuery.colorbox({html:'<iframe id="vid_frame" width="640" height="360" src="http://www.youtube.com/embed/' + id +'?enablejsapi=1&autoplay=1&rel=0" frameborder="0" allowfullscreen></iframe>'});
+        };
+    </script>
 
     <script type="text/ng-template" id="timelines.html">
         <div class="people-list">
@@ -224,14 +232,15 @@
                 $('body').on('click', '.contents-list > li > div', function () {
                     $('.content-modal-title').html($(this).data('title'));
                     if ($(this).data(type) === "2") {
-                        $('.modal-body > iframe').attr('src', $(this).data('url'));
-                        $('.modal-body > iframe').show();
+                        show_youtube($(this).data('url'));
                     }
+                    else {
                         $('.modal-body > img').attr('src', $(this).data('url'));
                         $('.modal-body > img').show();
                         $('.content-modal-text').html($(this).data('desc'));
                         $('.content-modal-name').html($(this).data('username'));
-                    $('#content-modal').modal('show');
+                        $('#content-modal').modal('show');
+                    }
                 });
 
                 $('body').on('click', '.close-content-modal', function () {
