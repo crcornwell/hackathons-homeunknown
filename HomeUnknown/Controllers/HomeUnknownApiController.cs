@@ -99,7 +99,7 @@ namespace HomeUnknown.Controllers
                     contents.Add(model);
                 }
             }
-            return contents;
+            return contents.Where(x => x.ContentType != ContentType.Video).ToList();
         }
 
         [HttpGet]
