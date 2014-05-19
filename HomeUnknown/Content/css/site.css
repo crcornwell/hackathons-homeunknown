@@ -29,6 +29,8 @@
 
 .events-list {
     text-align:center;
+    margin-top:50px;
+    background-color:#ffffff;
 }
 
 .events-list > li {
@@ -68,7 +70,12 @@
 
 .contents-list >li > div > p {
     font-weight: bold;
-    margin-top: 20px;
+    padding-top: 50%;
+}
+
+img.content-image {
+    max-width: 80%;
+    text-align: center;
 }
 
 #content-panel {
