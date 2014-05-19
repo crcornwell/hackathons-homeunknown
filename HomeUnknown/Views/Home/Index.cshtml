@@ -2,7 +2,7 @@
 @{
     Layout = null;
     Response.Headers["X-UA-Compatible"] = "IE=10";
-
+    
 }
 
 
@@ -31,10 +31,10 @@
     <link href="~/Content/css/site.css" rel="stylesheet" />
 
     <script src="~/Scripts/HomeUnknown.js"></script>
-
+    
 
     <script type="text/ng-template" id="timelines.html">
-        <div>
+        <div class="people-list">
             <ul class="list-inline timeline-list">
                 <li class="list-inline" ng-repeat="timeline in timelines">
                     <a href="#/events/{{timeline.id}}"><img src="{{timeline.pictureURL}}" /></a>
@@ -47,18 +47,29 @@
     <script type="text/ng-template" id="events.html">
         <div class="container">
             <div class="row">
-                <a href="#/contents/{{event.id}}/{{event.timelineId}}" ng-repeat="event in events">click</a>
+                <ul class="events-list list-inline">
+                    <li ng-repeat="event in events">
+                        <a href="#/contents/{{event.id}}/{{event.timelineId}}"><div></div></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </script>
 
     <script type="text/ng-template" id="contents.html">
         <div class="container">
+            <div class="row">
+                <ul class="events-list list-inline">
+                    <li ng-repeat="event in events">
+                        <a href="#/contents/{{event.id}}/{{event.timelineId}}"><div></div></a>
+                    </li>
+                </ul>
+            </div>
             <div class="row" id="content-panel">
                 <ul class="contents-list list-inline grid.effect2" id="grid">
-                    <li ng-repeat="content in contents"><div data-title="{{content.name}}" data-url="{{content.ContentURL}}"><img src={{content.ContentURL}} /><p>{{content.name}}</p></div></li>
+                    <li ng-repeat="content in contents"><div data-title="{{content.name}}" data-desc={{content.NoteText}} data-type={{content.ContentType}} data-url="{{content.contentURL}}"><p>{{content.name}}</p></div></li>
                 </ul>
-                <button class="add-new-content btn btn-default" data-event="{{eventID}}" data-toggle="modal" data-target="#add-content-modal">Add Content</button>
+                <button class="add-new-content btn btn-default" data-event="eventID" data-toggle="modal" data-target="#add-content-modal">Add Content</button>
             </div>
             <div class="modal fade" id="add-content-modal">
                 <div class="modal-dialog">
@@ -99,7 +110,7 @@
                                         <input type="text" name="contenturl" id="url" placeholder="URL" class="form-control" />
                                     </div>
                                 </div>
-                            </form>
+</form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -117,12 +128,12 @@
                             <h4 class="modal-title content-modal-title"></h4>
                         </div>
                         <div class="modal-body">
-                            <video></video>
-                            <img />
+                            <iframe hidden src="//player.vimeo.com/video/VIDEO_ID" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                            <img class="content-image" hidden/>
                             <p class="content-modal-text"></p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default close-content-modal" data-dismiss="modal">Close</button>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -220,9 +231,19 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 $('body').on('click', '.contents-list > li > div', function () {
+                    $('.content-modal-title').html($(this).data('title'));
+                    if ($(this).data(type) === "2") {
+                        $('.modal-body > iframe').attr('src', $(this).data('url'));
+                        $('.modal-body > iframe').show();
+                    }
+                        $('.modal-body > img').attr('src', $(this).data('url'));
+                        $('.modal-body > img').show();
                     $('#content-modal').modal('show');
-                    $('#content-modal-title').html($(this).data('title'));
-                    $('.modal-body > video').attr('src', $(this).data('url'));
+                });
+
+                $('body').on('click', '.close-content-modal', function () {
+                    $('.modal-body > video > source').hide();
+                    $('.modal-body > img').hide();
                 });
             });
 
