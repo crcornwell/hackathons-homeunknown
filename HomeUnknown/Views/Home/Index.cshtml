@@ -2,7 +2,7 @@
 @{
     Layout = null;
     Response.Headers["X-UA-Compatible"] = "IE=10";
-
+    
 }
 
 
@@ -31,7 +31,7 @@
     <link href="~/Content/css/site.css" rel="stylesheet" />
 
     <script src="~/Scripts/HomeUnknown.js"></script>
-
+    
 
     <script type="text/ng-template" id="timelines.html">
         <div class="people-list">
@@ -46,28 +46,17 @@
 
     <script type="text/ng-template" id="events.html">
         <div class="container">
-            <div class="row">
-                <ul class="events-list list-inline">
-                    <li ng-repeat="event in events">
-                        <a href="#/contents/{{event.id}}/{{event.timelineId}}"><div></div></a>
-                    </li>
-                </ul>
+            <div class="row"></div>
             </div>
-        </div>
     </script>
 
     <script type="text/ng-template" id="contents.html">
         <div class="container">
             <div class="row">
-                <ul class="events-list list-inline">
-                    <li ng-repeat="event in events">
-                        <a href="#/contents/{{event.id}}/{{event.timelineId}}"><div></div></a>
-                    </li>
-                </ul>
             </div>
             <div class="row" id="content-panel">
                 <ul class="contents-list list-inline grid.effect2" id="grid">
-                    <li ng-repeat="content in contents"><div data-title="{{content.name}}" data-desc={{content.NoteText}} data-type={{content.ContentType}} data-url="{{content.contentURL}}"><p>{{content.name}}</p></div></li>
+                    <li ng-repeat="content in contents"><div data-title="{{content.name}}" data-desc={{content.noteText}} data-type={{content.contentType}} data-url="{{content.contentURL}}"><p>{{content.name}}</p><img class="thumbnail-image" src={{content.contentURL}}></div></li>
                 </ul>
                 <button class="add-new-content btn btn-default" data-event="eventID" data-toggle="modal" data-target="#add-content-modal">Add Content</button>
             </div>
@@ -93,7 +82,7 @@
                                         <select name="contenttype" class="form-control">
                                             @foreach (var item in (ContentType[])Enum.GetValues(typeof(ContentType)).Cast<ContentType>())
                                             {
-                                            <option value="@item">@item</option>
+                                                <option value="@item">@item</option>
                                             }
                                         </select>
                                     </div>
@@ -110,7 +99,7 @@
                                         <input type="text" name="contenturl" id="url" placeholder="URL" class="form-control" />
                                     </div>
                                 </div>
-                            </form>
+</form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -176,13 +165,13 @@
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" placeholder="Name" name="name" id="eventname" />
                                 </div>
-                            </div>
+        </div>
                             <div class="form-group">
                                 <label for="location" class="control-label col-sm-4" style="text-align:center">Location</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" placeholder="Location" name="location" id="location" />
                                 </div>
-                            </div>
+    </div>
                             <div class="form-group">
                                 <label for="year" class="control-label col-sm-4" style="text-align:center">Date</label>
                                 <div class="col-sm-8">
@@ -266,7 +255,7 @@
                 maptype: 'watercolor',                   //OPTIONAL MAP STYLE
             }
         </script>
-        <script src="http://homeunknown.collabaxis.com/demos/timeline-steve_t2.js"></script>
+        <script src="~/Scripts/timeline-js-steve-2.js"></script>
         @*<script src="~/Scripts/timeline-steve.js"></script>*@
         <script type="text/javascript">
             $(document).ready(function () {
@@ -276,8 +265,9 @@
                         $('.modal-body > iframe').attr('src', $(this).data('url'));
                         $('.modal-body > iframe').show();
                     }
-                    $('.modal-body > img').attr('src', $(this).data('url'));
-                    $('.modal-body > img').show();
+                        $('.modal-body > img').attr('src', $(this).data('url'));
+                        $('.modal-body > img').show();
+                        $('.content-modal-text').html($(this).data('desc'));
                     $('#content-modal').modal('show');
                 });
 
@@ -299,7 +289,7 @@
                     $.post('/api/events', formData).done(function (data) {
                         alert(data);
                     });
-                });
+            });
             }
 
         </script>

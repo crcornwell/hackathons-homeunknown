@@ -6,7 +6,7 @@
         controller: 'TimelineCtrl',
         templateUrl: 'timelines.html'
     })
-    .when('/contents/:eventId/:timelineId', {
+    .when('/contents/:eventId', {
         controller: 'ContentsCtrl',
         templateUrl: 'contents.html'
     })
@@ -28,6 +28,7 @@
     $http({ method: 'GET', url: '/api/timelines/0' }).
     success(function (data) {
         $scope.timelines = data;
+        $('#timelinejs').hide();
     })
 })
 
@@ -36,10 +37,6 @@
     success(function (data) {
         $scope.contents = data;
         $scope.eventID = $routeParams.eventId;
-    });
-    $http({ method: 'GET', url: 'api/events/' + $routeParams.timelineId }).
-    success(function (data) {
-        $scope.events = data;
     });
     $scope.addContent = function() {
         $http({ method: 'POST', url: '/api/content/', data: $('#add-content-form').serialize() });
