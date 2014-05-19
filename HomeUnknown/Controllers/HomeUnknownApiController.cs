@@ -100,7 +100,7 @@ namespace HomeUnknown.Controllers
                     contents.Add(model);
                 }
             }
-            return contents.Where(x => x.ContentType != ContentType.Video).ToList();
+            return contents.Except(contents.Where(x => x.ContentType == ContentType.Video && x.ContentURL.ToString().Contains("vimeo"))).ToList();
         }
 
         [HttpGet]
